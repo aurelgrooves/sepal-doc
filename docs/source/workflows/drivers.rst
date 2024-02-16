@@ -300,20 +300,23 @@ Resolution can also be selected accordingly – you can choose :btn:`30` to be a
 Time-series analysis
 --------------------
 
-.. attention::
+Time series analysis is performed on a systematic grid of points over the CAFI study area using eSBAE - refer to the SEPAL documentation for general information and getting started an executing notebooks 01-04.
 
-    This part of the documentation is still under construction.
+For the drivers project, customized scripts are provided for all steps after step 4: Dataset_Augmentation, as there are visually interpreted data available to use as training to estimate probabilities of change and 
+subsequently stratify the entire grid of points to select samples for further visual interpretation, clean and merge CEO data and finally, estimate areas and uncertainty.
 
-.. _workflows:drivers:stratification:
+Once Dataset Augmentation is completed, the customized CAFI CAFI DDD eSBAE scripts can be cloned from this repository: https://github.com/aurelgrooves/CAFI_DDD   
 
-Sample stratification
----------------------
+These scripts perform the following tasks:
+esbae_05a_merge_esbae_ceo_str_random.ipynb: This workflow combines the validated stratified random data from phase I of the project with the eSBAE variables from the dataset augmentation step.
+esbae_05b_supervised_w_CAFI_data.ipynb: performs a supervised classification of change types (deforestation, degradation, stable and non-forest) on the systematic eSBAE variables using the stratified random data from phase I as training. This outputs a probability of forest change for all points and 3 strata: high probability of no change, medium probability of change and high probability of change. 
+esbae_05c_CAFI_sampling_for_CEO.ipynb: uses the supervised model and strata created in the previous step to extract the desired number proportional samples for validation with CEO.
+esbae_05d_merge_sbae_ceo_systematic.ipynb: the data validated in CEO are merged with the eSBAE points for country of interest
+esbae_05e_supervised_CAFI_all_points.ipynb: performs a supervised classification of change types on all points using the validated data. The years of change are applied using CUSUM dates.
+esbae_06_calculate_areas.ipynb: calculate areas and margin of error for deforestation and degradation annually or for all years as well as stable, non-forested areas. 
 
-.. attention::
 
-    This part of the documentation is still under construction.
 
-.. _workflows:drivers:quantification:
 
 Identification of direct drivers
 ---------------------------------
